@@ -29,12 +29,6 @@ while true do
 
         if (p1 == "Maintenance Hatch") then
             if t.buttonList["Spawners"].active then
-                t:rename("Maintenance Hatch", "Maintenance Hatch ( 15s )")
-                maintenanceHatchName = "Maintenance Hatch ( 15s )"
-                -- Disable the spawners
-                rs.setOutput("left", t.buttonList["Spawners"].active)
-                t:toggleButton("Spawners")
-                os.sleep(1)
 
                 -- Enable the fans and mashers if they aren't already. 
                 -- Just to ensure the area is clear.
@@ -48,21 +42,29 @@ while true do
                     t:toggleButton("Mashers")
                 end
 
+                t:rename("Maintenance Hatch", "Maintenance Hatch ( 15s )")
+                maintenanceHatchName = "Maintenance Hatch ( 15s )"
+                -- Disable the spawners
+                rs.setOutput("left", t.buttonList["Spawners"].active)
+                t:toggleButton("Spawners")
+                os.sleep(1)
+
                 -- 15s timeout to let the rest of the mobs die
                 for i = 14, 1, -1 do
                     t:rename(maintenanceHatchName, "Maintenance Hatch ( " .. i .. "s )")
                     maintenanceHatchName = "Maintenance Hatch ( " .. i .. "s )"
                     os.sleep(1)
                 end
+
                 -- Toggle buttons
                 if t.buttonList["Fans"].active then
-                    rs.setOutput("bottom", t.buttonList["Fans"].active)
                     t:toggleButton("Fans")
+                    rs.setOutput("bottom", false)
                 end
 
                 if t.buttonList["Mashers"].active then
-                    rs.setOutput("right", t.buttonList["Mashers"].active)
                     t:toggleButton("Mashers")
+                    rs.setOutput("right", false)
                 end
 
                 t:rename(maintenanceHatchName, "Maintenance Hatch")
