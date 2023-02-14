@@ -43,7 +43,7 @@ while true do
                 rs.setOutput("right", t.buttonList["Mashers"].active)
                 t:toggleButton("Mashers")
             else
-                t:toggleButton("Mashers")
+                t:toggleButton("Maintenance Hatch")
             end
         end
     end
