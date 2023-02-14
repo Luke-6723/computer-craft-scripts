@@ -13,36 +13,18 @@ while true do
     local event, p1 = t:handleEvents(os.pullEvent())
     if event == "button_click" then
         if p1 == "Spawners" then
-            if maintenanceCountdownRunning then
-                for i = 1, 3, 1 do
-                    t:flash(maintenanceHatchName)
-                end
-            else
-                t:toggleButton("Spawners")
-                rs.setOutput("left", t.buttonList["Spawners"].active)
-            end
+            t:toggleButton("Spawners")
+            rs.setOutput("left", t.buttonList["Spawners"].active)
         end
 
         if p1 == "Mashers" then
-            if maintenanceCountdownRunning then
-                for i = 1, 3, 1 do
-                    t:flash(maintenanceHatchName)
-                end
-            else
-                t:toggleButton("Mashers")
-                rs.setOutput("right", t.buttonList["Mashers"].active)
-            end
+            t:toggleButton("Mashers")
+            rs.setOutput("right", t.buttonList["Mashers"].active)
         end
 
         if p1 == "Fans" then
-            if maintenanceCountdownRunning then
-                for i = 1, 3, 1 do
-                    t:flash(maintenanceHatchName)
-                end
-            else
-                t:toggleButton("Fans")
-                rs.setOutput("bottom", t.buttonList["Fans"].active)
-            end
+            t:toggleButton("Fans")
+            rs.setOutput("bottom", t.buttonList["Fans"].active)
         end
 
         if (p1 == "Maintenance Hatch") then
@@ -86,8 +68,10 @@ while true do
                 t:rename(maintenanceHatchName, "Maintenance Hatch")
                 maintenanceHatchName = "Maintenance Hatch"
                 t:toggleButton(maintenanceHatchName)
+                rs.setOutput("top", t.buttonList[maintenanceHatchName].active)
             else
                 t:toggleButton("Maintenance Hatch")
+                rs.setOutput("top", t.buttonList[maintenanceHatchName].active)
             end
         end
     end
