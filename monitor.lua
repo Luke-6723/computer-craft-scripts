@@ -70,7 +70,10 @@ while true do
                 t:rename(maintenanceHatchName, "Maintenance Hatch")
                 maintenanceHatchName = "Maintenance Hatch"
                 t:toggleButton(maintenanceHatchName)
-                rs.setOutput("top", t.buttonList[maintenanceHatchName].active)
+                rs.setOutput("top", true)
+                rs.setOutput("bottom", false)
+                rs.setOutput("left", false)
+                rs.setOutput("right", false)
             else
                 t:toggleButton("Maintenance Hatch")
                 rs.setOutput("top", t.buttonList[maintenanceHatchName].active)
