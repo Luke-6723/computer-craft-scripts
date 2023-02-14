@@ -27,18 +27,24 @@ while true do
         end
 
         if (p1 == "Maintenance Hatch") then
-            -- Disable the spawners
-            rs.setOutput("left", t.buttonList["Spawners"].active)
-            t:toggleButton("Spawners")
-            -- 15s timeout to let the rest of the mobs die
-            for i = 1, 15, 1 do
-              os.sleep(1)
-              t:rename("Maintenance Hatch ( " + i + "s )")
+            if t.buttonList["Spawners"].active then
+                -- Disable the spawners
+                rs.setOutput("left", t.buttonList["Spawners"].active)
+                t:toggleButton("Spawners")
+
+                -- 15s timeout to let the rest of the mobs die
+                for i = 1, 15, 1 do
+                    os.sleep(1)
+                    t:rename("Maintenance Hatch ( " + i + "s )")
+                end
+                -- Toggle buttons
+                rs.setOutput("bottom", t.buttonList["Fans"].active)
+                t:toggleButton("Fans")
+                rs.setOutput("right", t.buttonList["Mashers"].active)
+                t:toggleButton("Mashers")
+            else
+                t:toggleButton("Mashers")
             end
-            rs.setOutput("bottom", t.buttonList["Fans"].active)
-            t:toggleButton("Fans")
-            rs.setOutput("right", t.buttonList["Mashers"].active)
-            t:toggleButton("Mashers")
         end
     end
 end
