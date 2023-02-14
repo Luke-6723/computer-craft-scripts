@@ -2,7 +2,6 @@ os.loadAPI("/touchpoint.lua")
 
 local t = touchpoint.new("back")
 local maintenanceHatchName = "Maintenance Hatch"
-local maintenanceCountdownRunning = false
 t:add("Spawners", nil, 2, 2, 38, 4, colors.red, colors.lime)
 t:add("Fans", nil, 2, 6, 38, 8, colors.red, colors.lime)
 t:add("Mashers", nil, 2, 10, 38, 12, colors.red, colors.lime)
@@ -48,7 +47,6 @@ while true do
 
         if (p1 == "Maintenance Hatch") then
             if t.buttonList["Spawners"].active then
-                maintenanceCountdownRunning = true
                 t:rename("Maintenance Hatch", "Maintenance Hatch ( 15s )")
                 maintenanceHatchName = "Maintenance Hatch ( 15s )"
                 -- Disable the spawners
