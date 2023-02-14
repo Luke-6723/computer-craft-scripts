@@ -45,7 +45,7 @@ while true do
                 t:rename("Maintenance Hatch", "Maintenance Hatch ( 15s )")
                 maintenanceHatchName = "Maintenance Hatch ( 15s )"
                 -- Disable the spawners
-                rs.setOutput("left", t.buttonList["Spawners"].active)
+                rs.setOutput("left", false)
                 t:toggleButton("Spawners")
                 os.sleep(1)
 
@@ -72,7 +72,6 @@ while true do
                 t:toggleButton(maintenanceHatchName)
                 rs.setOutput("top", true)
                 rs.setOutput("bottom", false)
-                rs.setOutput("left", false)
                 rs.setOutput("right", false)
             else
                 t:toggleButton("Maintenance Hatch")
