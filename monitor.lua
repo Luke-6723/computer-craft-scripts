@@ -6,7 +6,7 @@ local maintenanceCountdownRunning = false
 t:add("Spawners", nil, 2, 2, 38, 4, colors.red, colors.lime)
 t:add("Fans", nil, 2, 6, 38, 8, colors.red, colors.lime)
 t:add("Mashers", nil, 2, 10, 38, 12, colors.red, colors.lime)
-t:add(maintenanceHatchName, nil, 2, 16, 38, 18, colors.blue, colors.red)
+t:add(maintenanceHatchName, nil, 2, 16, 38, 18, colors.blue, colors.cyan)
 
 t:draw()
 
