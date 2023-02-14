@@ -1,10 +1,11 @@
 os.loadAPI("/touchpoint.lua")
 
 local t = touchpoint.new("back")
+local maintenanceHatchName = "Maintenance Hatch"
 t:add("Spawners", nil, 2, 2, 38, 4, colors.red, colors.lime)
 t:add("Fans", nil, 2, 6, 38, 8, colors.red, colors.lime)
 t:add("Mashers", nil, 2, 10, 38, 12, colors.red, colors.lime)
-t:add("Maintenance Hatch", nil, 2, 16, 38, 18, colors.blue, colors.red)
+t:add(maintenanceHatchName, nil, 2, 16, 38, 18, colors.blue, colors.red)
 
 t:draw()
 
@@ -29,6 +30,7 @@ while true do
         if (p1 == "Maintenance Hatch") then
             if t.buttonList["Spawners"].active then
                 t:rename("Maintenance Hatch", "Maintenance Hatch ( 15s )")
+                maintenanceHatchName = "Maintenance Hatch ( 15s )"
                 -- Disable the spawners
                 rs.setOutput("left", t.buttonList["Spawners"].active)
                 t:toggleButton("Spawners")
@@ -36,7 +38,8 @@ while true do
 
                 -- 15s timeout to let the rest of the mobs die
                 for i = 14, 1, -1 do
-                    t:rename("Maintenance Hatch", "Maintenance Hatch ( " .. i .. "s )")
+                    t:rename(maintenanceHatchName, "Maintenance Hatch ( " .. i .. "s )")
+                    maintenanceHatchName = "Maintenance Hatch ( " .. i .. "s )"
                     os.sleep(1)
                 end
                 -- Toggle buttons
@@ -49,6 +52,10 @@ while true do
                     rs.setOutput("right", t.buttonList["Mashers"].active)
                     t:toggleButton("Mashers")
                 end
+                
+                t:rename(maintenanceHatchName, "Maintenance Hatch")
+                maintenanceHatchName = "Maintenance Hatch"
+                t:toggleButton(maintenanceHatchName)
             else
                 t:toggleButton("Maintenance Hatch")
             end
