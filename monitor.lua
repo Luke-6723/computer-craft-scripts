@@ -35,7 +35,7 @@ while true do
                 -- 15s timeout to let the rest of the mobs die
                 for i = 1, 15, 1 do
                     os.sleep(1)
-                    t:rename("Maintenance Hatch ( " .. i .. "s )")
+                    t:rename("Maintenance Hatch", "Maintenance Hatch ( " .. i .. "s )")
                 end
                 -- Toggle buttons
                 rs.setOutput("bottom", t.buttonList["Fans"].active)
