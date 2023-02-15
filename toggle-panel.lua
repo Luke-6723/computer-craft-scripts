@@ -38,58 +38,58 @@ while true do
             if t.buttonList[maintenanceHatchName].active then
                 t:toggleButton(maintenanceHatchName)
                 rs.setOutput("top", false)
-                return
-            end
-            -- Enable the fans and mashers if they aren't already. 
-            -- Just to ensure the area is clear.
-            if not t.buttonList["Fans"].active then
-                rs.setOutput("bottom", true)
-                t:toggleButton("Fans")
-            end
-
-            if not t.buttonList["Mashers"].active then
-                rs.setOutput("right", true)
-                t:toggleButton("Mashers")
-            end
-
-            t:rename("Maintenance Hatch", "Maintenance Hatch ( 15s )")
-            maintenanceHatchName = "Maintenance Hatch ( 15s )"
-            -- Disable the spawners
-            rednet.broadcast("reset")
-            for k, v in pairs(t.buttonList) do
-                if (k == "Mashers") then
-                elseif (k == "Fans") then
-                elseif t.buttonList[k].active then
-                    t:toggleButton(k)
+            else
+                -- Enable the fans and mashers if they aren't already. 
+                -- Just to ensure the area is clear.
+                if not t.buttonList["Fans"].active then
+                    rs.setOutput("bottom", true)
+                    t:toggleButton("Fans")
                 end
-            end
-            os.sleep(1)
 
-            -- 15s timeout to let the rest of the mobs die
-            for i = 14, 1, -1 do
-                t:rename(maintenanceHatchName,
-                         "Maintenance Hatch ( " .. i .. "s )")
-                maintenanceHatchName = "Maintenance Hatch ( " .. i .. "s )"
+                if not t.buttonList["Mashers"].active then
+                    rs.setOutput("right", true)
+                    t:toggleButton("Mashers")
+                end
+
+                t:rename("Maintenance Hatch", "Maintenance Hatch ( 15s )")
+                maintenanceHatchName = "Maintenance Hatch ( 15s )"
+                -- Disable the spawners
+                rednet.broadcast("reset")
+                for k, v in pairs(t.buttonList) do
+                    if (k == "Mashers") then
+                    elseif (k == "Fans") then
+                    elseif t.buttonList[k].active then
+                        t:toggleButton(k)
+                    end
+                end
                 os.sleep(1)
-            end
 
-            -- Toggle buttons
-            if t.buttonList["Fans"].active then
-                t:toggleButton("Fans")
+                -- 15s timeout to let the rest of the mobs die
+                for i = 14, 1, -1 do
+                    t:rename(maintenanceHatchName,
+                             "Maintenance Hatch ( " .. i .. "s )")
+                    maintenanceHatchName = "Maintenance Hatch ( " .. i .. "s )"
+                    os.sleep(1)
+                end
+
+                -- Toggle buttons
+                if t.buttonList["Fans"].active then
+                    t:toggleButton("Fans")
+                    rs.setOutput("bottom", false)
+                end
+
+                if t.buttonList["Mashers"].active then
+                    t:toggleButton("Mashers")
+                    rs.setOutput("right", false)
+                end
+
+                t:rename(maintenanceHatchName, "Maintenance Hatch")
+                maintenanceHatchName = "Maintenance Hatch"
+                t:toggleButton(maintenanceHatchName)
+                rs.setOutput("top", true)
                 rs.setOutput("bottom", false)
-            end
-
-            if t.buttonList["Mashers"].active then
-                t:toggleButton("Mashers")
                 rs.setOutput("right", false)
             end
-
-            t:rename(maintenanceHatchName, "Maintenance Hatch")
-            maintenanceHatchName = "Maintenance Hatch"
-            t:toggleButton(maintenanceHatchName)
-            rs.setOutput("top", true)
-            rs.setOutput("bottom", false)
-            rs.setOutput("right", false)
         else
             t:toggleButton(p1)
             extraMessage = ""
