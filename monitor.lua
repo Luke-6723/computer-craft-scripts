@@ -2,32 +2,35 @@ os.loadAPI("/touchpoint.lua")
 
 local t = touchpoint.new("back")
 local maintenanceHatchName = "Maintenance Hatch"
-t:add("Spawners", nil, 2, 2, 38, 4, colors.red, colors.lime)
-t:add("Fans", nil, 2, 6, 38, 8, colors.red, colors.lime)
-t:add("Mashers", nil, 2, 10, 38, 12, colors.red, colors.lime)
-t:add(maintenanceHatchName, nil, 2, 16, 38, 18, colors.blue, colors.cyan)
+--[[
+t:add(name, nil, minX, minY, maxX, maxY, colors.red, colors.lime)
+]] --    
+t:add("Slime", nil, 2, 2, 12, 6, colors.red, colors.lime)
+t:add("Slime (M)", nil, 15, 2, 25, 6, colors.red, colors.lime)
+t:add("Skeleton", nil, 28, 2, 38, 6, colors.red, colors.lime)
+
+t:add("Spider", nil, 2, 8, 12, 12, colors.red, colors.lime)
+t:add("Blaze", nil, 15, 8, 25, 12, colors.red, colors.lime)
+t:add("WSkeleton", nil, 28, 8, 38, 12, colors.red, colors.lime)
+
+t:add("Fans", nil, 2, 15, 38, 17, colors.red, colors.lime)
+t:add("Mashers", nil, 2, 19, 38, 21, colors.red, colors.lime)
+t:add(maintenanceHatchName, nil, 2, 23, 38, 25, colors.blue, colors.cyan)
 
 t:draw()
 
 while true do
     local event, p1 = t:handleEvents(os.pullEvent())
     if event == "button_click" then
-        if p1 == "Spawners" then
-            t:toggleButton("Spawners")
-            rs.setOutput("left", t.buttonList["Spawners"].active)
-        end
-
         if p1 == "Mashers" then
             t:toggleButton("Mashers")
             rs.setOutput("right", t.buttonList["Mashers"].active)
-        end
 
-        if p1 == "Fans" then
+        elseif p1 == "Fans" then
             t:toggleButton("Fans")
             rs.setOutput("bottom", t.buttonList["Fans"].active)
-        end
 
-        if (p1 == "Maintenance Hatch") then
+        elseif (p1 == "Maintenance Hatch") then
             if t.buttonList["Spawners"].active then
 
                 -- Enable the fans and mashers if they aren't already. 
@@ -51,7 +54,8 @@ while true do
 
                 -- 15s timeout to let the rest of the mobs die
                 for i = 14, 1, -1 do
-                    t:rename(maintenanceHatchName, "Maintenance Hatch ( " .. i .. "s )")
+                    t:rename(maintenanceHatchName,
+                             "Maintenance Hatch ( " .. i .. "s )")
                     maintenanceHatchName = "Maintenance Hatch ( " .. i .. "s )"
                     os.sleep(1)
                 end
@@ -77,6 +81,8 @@ while true do
                 t:toggleButton("Maintenance Hatch")
                 rs.setOutput("top", t.buttonList[maintenanceHatchName].active)
             end
+        else
+            rednet.broadcast(p1)
         end
     end
 end
