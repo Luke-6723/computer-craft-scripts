@@ -1,7 +1,7 @@
 rednet.open("front")
 shell.run('label set Skeleton')
 print("Waiting for Signal")
-print("Spawner: Wither Skeleton")
+print("Spawner: Skeleton")
  
 local redstoneActive = true
  

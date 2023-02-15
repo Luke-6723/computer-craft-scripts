@@ -1,7 +1,7 @@
 rednet.open("front")
 shell.run('label set Slime')
 print("Waiting for Signal")
-print("Spawner: Wither Skeleton")
+print("Spawner: Slime")
  
 local redstoneActive = true
  
