@@ -1,4 +1,5 @@
 rednet.open("front")
+shell.run('label set Blaze')
 print("Waiting for Signal")
 print("Spawner: Blaze")
  
